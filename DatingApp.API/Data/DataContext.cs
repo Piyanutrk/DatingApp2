@@ -9,9 +9,6 @@ namespace DatingApp.API.Data
 
         public DbSet<Weather> Weathers { get; set; }
         public DbSet<Values> Values { get; set; }
-
-        // protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //     => options.UseSqlite("Data Source=datingapp.db");
-
+        public DbSet<User> Users { get; set; }
     }
 }
