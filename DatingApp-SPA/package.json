@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~10.0.6",
     "@angular/router": "~10.0.6",
     "@auth0/angular-jwt": "^5.0.1",
+    "@types/jest": "^26.0.13",
+    "@types/mocha": "^8.0.3",
     "alertifyjs": "^1.13.1",
     "bootstrap": "^4.5.0",
     "bootswatch": "^4.5.2",

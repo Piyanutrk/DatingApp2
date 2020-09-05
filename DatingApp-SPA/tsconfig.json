@@ -17,8 +17,9 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "allowJs": true,
-    "typeRoots": [
-      "src/typings.d.ts"
-    ]
+    // "typeRoots": [
+    //   "src/typings.d.ts"
+    // ],
+    "types": ["jest","mocha"]
   }
 }
