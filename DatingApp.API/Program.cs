@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DatingApp.API.Data;
-using DatingApp.API.Models;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -15,18 +12,24 @@ namespace DatingApp.API
     {
         public static void Main(string[] args)
         {
-            // using (var db = new DataContext())
-            // {
-            //     System.Console.WriteLine("Insert new value");
-            //     db.Add(new Values { Name = "valueN" });
-            //     db.SaveChanges();
+            var host = CreateHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<DataContext>();
+                    context.Database.Migrate();
+                    Seed.SeedUsers(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex,"An error occured during migration");
+                }
+            }
 
-            //     System.Console.WriteLine("Query");
-            //     var val = db.Values.Select(x => x).First();
-            //     System.Console.WriteLine(val.Name);
-            // }
-
-            CreateHostBuilder(args).Build().Run();
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
