@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pagination, PaginationResult } from '../_models/pagination';
+import { Pagination, PaginatedResult } from '../_models/pagination';
 import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
@@ -40,7 +40,7 @@ export class ListsComponent implements OnInit {
         this.likesParam
       )
       .subscribe(
-        (res: PaginationResult<User[]>) => {
+        (res: PaginatedResult<User[]>) => {
           this.users = res.result;
           this.pagination = res.pagination;
         },
